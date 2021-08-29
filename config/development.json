@@ -1,0 +1,4 @@
+{
+  "EXISTS_RECORD":"email_exists",
+  "UNAUTH_REQUEST":400
+}
