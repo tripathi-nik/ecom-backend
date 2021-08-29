@@ -59,7 +59,19 @@ router.post('/add', (req, res) => {
     };
     async function addRecord(){
       let agentRecord = await agent_model.agentAdd(agentNew);
-      res.send(agentRecord);
+      let resObj = {};
+      if(agentRecord._id){
+        let token = jwt.sign({user_id:agentRecord._id,email:agentRecord.email_address},'ecom_auth_token');
+         resObj = {
+           data:agentRecord,
+           token:token
+         };
+      }else{
+        resObj = {
+          ...agentRecord
+        };
+      }
+      res.send(resObj);
     }
     addRecord();
 
