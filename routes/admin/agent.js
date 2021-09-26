@@ -162,12 +162,12 @@ router.post('/user-profile', (req, res) => {
 });
 
 router.post('/update-profile', (req, res) => {
-   const user_id = req.user_id;
-   async function update_profile(){
-   let agentRecord = await agent_model.agentUpdate(user_id,req.body);
-   if(agentRecord.status===parseInt(404)){
-     res.status(404).send('not_found');
-   }
+  const user_id = req.user_id;
+  async function update_profile(){
+    let agentRecord = await agent_model.agentUpdate(user_id,req.body);
+     if(agentRecord.status===parseInt(404)){
+       res.status(404).send('not_found');
+     }
    else{
      res.status(200).send({
        first_name:req.body.first_name,
@@ -178,8 +178,8 @@ router.post('/update-profile', (req, res) => {
        zip:req.body.zip
      });
    }
- }
- update_profile();
+  }
+  update_profile();
 });
 router.post('/lostPassword', (req, res) => {
     const agentNew = {
