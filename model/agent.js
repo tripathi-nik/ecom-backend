@@ -39,6 +39,12 @@ const agentSchema = new mongoose.Schema({
         minlength:3,
         trim:true
     },
+    age: {
+        type:String,
+    },
+    sex: {
+        type:String,
+    },
     local_address: {
         type:String,
     },
@@ -102,7 +108,7 @@ async function checkLogin(value){
 }
 async function agentGet(value){
   let agent = await Agents.find({_id:value})
-  .select({first_name:1,last_name:1,profile_picture:1,local_address:1,city:1,state:1,zip:1});
+  .select({first_name:1,last_name:1,profile_picture:1,local_address:1,city:1,state:1,zip:1,age:1,sex:1});
   if(agent[0]){
     return agent[0];
   }else{
@@ -131,7 +137,9 @@ async function agentUpdate(user_id,request){
           local_address:request.local_address,
           city:request.city,
           state:request.state,
-          zip:request.zip
+          zip:request.zip,
+          age:request.age,
+          sex:request.sex
       }
   });
   if(agent.ok){
